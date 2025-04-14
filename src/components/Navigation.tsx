@@ -1,65 +1,61 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const { language, setLanguage, t } = useLanguage();
 
-  const sections = [
-    { id: 'intro', title: 'Giới thiệu' },
-    { id: 'history', title: 'Lịch sử' },
-    { id: 'marxist-view', title: 'Quan điểm Mác-Lênin' },
-    { id: 'existence', title: 'Phương thức tồn tại' },
-    { id: 'unity', title: 'Tính thống nhất' },
-    { id: 'conclusion', title: 'Kết luận' },
+  const menuItems = [
+    { href: '#intro', text: t('nav.intro') },
+    { href: '#history-idealism', text: t('nav.history') },
+    { href: '#marxist-view-simplified', text: t('nav.marxist') },
+    { href: '#existence-simplified', text: t('nav.existence') },
+    { href: '#unity-simplified', text: t('nav.unity') },
+    { href: '#conclusion', text: t('nav.conclusion') },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const current = sections.find(section => {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      setActiveSection(current?.id || '');
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const toggleLanguage = () => {
+    setLanguage(language === 'vi' ? 'en' : 'vi');
+  };
 
   return (
-    <nav className="sticky top-0 bg-white shadow-md z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <button
-            className="sm:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <FaTimes /> : <FaBars />}
-          </button>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white text-dark shadow-md">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <a href="#" className="text-2xl font-sans font-bold">
+            {t('site.title')}
+          </a>
+          
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1 rounded border border-dark text-sm hover:bg-dark hover:text-white transition-colors"
+            >
+              {language === 'vi' ? 'EN' : 'VI'}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden"
+            >
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
 
           <div className={`
-            sm:flex items-center space-x-8
-            ${isOpen ? 'absolute top-16 left-0 right-0 bg-white p-4 shadow-md' : 'hidden'}
-            sm:static sm:shadow-none
+            lg:flex items-center space-x-8
+            ${isOpen ? 'absolute top-full left-0 right-0 bg-white text-dark p-4 shadow-md' : 'hidden'}
+            lg:static lg:bg-transparent lg:p-0 lg:shadow-none
           `}>
-            {sections.map(section => (
+            {menuItems.map((item) => (
               <a
-                key={section.id}
-                href={`#${section.id}`}
-                className={`
-                  block py-2 sm:py-0
-                  ${activeSection === section.id ? 'text-accent' : 'text-gray-600 hover:text-accent'}
-                  transition-colors duration-200
-                `}
+                key={item.href}
+                href={item.href}
+                className="text-dark hover:text-gray-600 transition-colors block py-2 lg:py-0"
                 onClick={() => setIsOpen(false)}
               >
-                {section.title}
+                {item.text}
               </a>
             ))}
           </div>
