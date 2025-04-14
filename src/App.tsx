@@ -1157,12 +1157,7 @@ function App() {
                       </span>
                       <span>{t("existence.spacetime.point4")}</span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-indigo-500 mr-2 mt-1 text-xs">
-                        ◆
-                      </span>
-                      <span>{t("existence.spacetime.point5")}</span>
-                    </li>
+
                   </ul>
                 </div>
               </motion.div>
