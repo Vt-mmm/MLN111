@@ -7,7 +7,6 @@ declare global {
   }
 }
 
-import React from 'react';
 import SlideShow from "./components/SlideShow";
 import "./index.css";
 import Section from "./components/Section";
