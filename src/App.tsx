@@ -834,7 +834,7 @@ function App() {
                   }}
                   data-active="true"
                 >
-                  {t("existence.tabs.nature_features")}
+                  {t("existence.tabs.nature_features")} { /* Updated key */ }
                 </button>
                 <button
                   id="tab-motion-2"
@@ -856,7 +856,7 @@ function App() {
                   }}
                   data-active="false"
                 >
-                  {t("existence.tabs.forms_relations")}
+                  {t("existence.tabs.forms_relations")} { /* Updated key */ }
                 </button>
               </div>
             </div>
@@ -874,12 +874,8 @@ function App() {
                   className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100/80"
                 >
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                    <h3 className="text-xl font-bold">
-                      {t("existence.motion.what_is.title")}
-                    </h3>
-                    <p className="text-sm italic opacity-90">
-                      {t("existence.motion.what_is.subtitle")}
-                    </p>
+                    <h3 className="text-xl font-bold">{t('existence.motion.what_is.title')}</h3> { /* Removed numbering, using key */ }
+                    <p className="text-sm italic opacity-90">{t('existence.motion.what_is.subtitle')}</p>
                   </div>
                   <div className="p-6 space-y-3">
                     <div className="flex items-start">
@@ -930,9 +926,7 @@ function App() {
                 className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 border border-gray-100/80"
               >
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                  <h3 className="text-xl font-bold">
-                    {t("existence.motion.features.title")}
-                  </h3>
+                  <h3 className="text-xl font-bold">{t('existence.motion.features.title')}</h3> { /* Removed numbering, using key */ }
                 </div>
                 <div className="p-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
@@ -1009,83 +1003,54 @@ function App() {
               id="content-motion-2"
               className="hidden animate-fade animate-once animate-duration-[800ms]"
             >
+              <div className="mb-16 animate-fade-up animate-once animate-duration-[800ms]">
+                <h3 className="text-3xl font-light text-center mb-4 text-gray-800">{t('existence.basic_forms.title')}</h3>
+                <p className="text-center text-gray-600 mb-10 max-w-xl mx-auto">{t('existence.basic_forms.subtitle')}</p>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-4xl mx-auto text-center">
+                  {[
+                    { key: 'mechanical', color: 'bg-blue-100', textColor: 'text-blue-800' },
+                    { key: 'physical', color: 'bg-purple-100', textColor: 'text-purple-800' },
+                    { key: 'chemical', color: 'bg-amber-100', textColor: 'text-amber-800' },
+                    { key: 'biological', color: 'bg-green-100', textColor: 'text-green-800' },
+                    { key: 'social', color: 'bg-red-100', textColor: 'text-red-800' },
+                  ].map((form, index) => (
+                    <motion.div
+                      key={form.key}
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className={`p-5 rounded-lg shadow-md ${form.color} ${form.textColor} font-medium transform transition hover:scale-105 hover:shadow-lg`}
+                    >
+                      {t(`existence.basic_forms.${form.key}`)}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
                 className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 border border-gray-100/80"
               >
-                <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5">
-                  <h3 className="text-xl font-bold">
-                    {t("existence.stillness.title")}
-                  </h3>
-                </div>
+                <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5"><h3 className="text-xl font-bold">{t('existence.stillness.title')}</h3></div>
                 <div className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div>
-                      <h4 className="font-bold text-lg text-gray-800 mb-3">
-                        {t("existence.stillness.what_is.title")}
-                      </h4>
-                      <div className="space-y-4">
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.what_is.point1")}
-                          </p>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.what_is.point2")}
-                          </p>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.what_is.point3")}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-lg text-gray-800 mb-3">
-                        {t("existence.stillness.relationship.title")}
-                      </h4>
-                      <div className="space-y-4">
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.relationship.point1")}
-                          </p>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.relationship.point2")}
-                          </p>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">
-                            ✓
-                          </div>
-                          <p className="ml-3 text-gray-700 leading-relaxed">
-                            {t("existence.stillness.relationship.point3")}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                     <div>
+                       <h4 className="font-bold text-lg text-gray-800 mb-3">{t('existence.stillness.what_is.title')}</h4>
+                       <div className="space-y-4">
+                         <div className="flex items-start"><div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">✓</div><p className="ml-3 text-gray-700 leading-relaxed">{t('existence.stillness.what_is.point1')}</p></div>
+                         <div className="flex items-start"><div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">✓</div><p className="ml-3 text-gray-700 leading-relaxed">{t('existence.stillness.what_is.point2')}</p></div>
+                         <div className="flex items-start"><div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">✓</div><p className="ml-3 text-gray-700 leading-relaxed">{t('existence.stillness.what_is.point3')}</p></div>
+                       </div>
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-lg text-gray-800 mb-3">{t('existence.stillness.relationship.title')}</h4>
+                       <div className="space-y-4">
+                         <div className="flex items-start"><div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">✓</div><p className="ml-3 text-gray-700 leading-relaxed">{t('existence.stillness.relationship.point1')}</p></div>
+                         <div className="flex items-start"><div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-500 text-white flex items-center justify-center mt-1 text-xs">✓</div><p className="ml-3 text-gray-700 leading-relaxed">{t('existence.stillness.relationship.point2')}</p></div>
+                       </div>
+                     </div>
+                   </div>
                 </div>
               </motion.div>
             </div>
