@@ -110,6 +110,7 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
+  const [activeExistenceTab, setActiveExistenceTab] = useState('nature');
 
   // Ref for parallax section
   const existenceSectionRef = useRef<HTMLElement>(null);
@@ -811,55 +812,32 @@ function App() {
               <div className="mb-12 flex justify-center">
                 <div className="inline-flex rounded-lg shadow-sm bg-white p-1 space-x-1">
                   <button
-                    id="tab-motion-1"
-                    className="px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 data-[active=true]:bg-indigo-100 data-[active=true]:text-indigo-700 text-gray-600 hover:bg-indigo-50"
-                    onClick={(e) => {
-                      /* ... tab handler ... */ e.currentTarget.setAttribute(
-                        "data-active",
-                        "true"
-                      );
-                      document
-                        .getElementById("tab-motion-2")
-                        ?.setAttribute("data-active", "false");
-                      document
-                        .getElementById("content-motion-1")
-                        ?.classList.remove("hidden");
-                      document
-                        .getElementById("content-motion-2")
-                        ?.classList.add("hidden");
-                    }}
-                    data-active="true"
+                    className={`px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 text-gray-600 hover:bg-indigo-50 ${
+                      activeExistenceTab === 'nature'
+                        ? 'bg-indigo-100 text-indigo-700'
+                        : 'bg-white'
+                    }`}
+                    onClick={() => setActiveExistenceTab('nature')}
                   >
-                    {t("existence.tabs.nature_features")} { /* Updated key */ }
+                    {t("existence.tabs.nature_features")}
                   </button>
                   <button
-                    id="tab-motion-2"
-                    className="px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 data-[active=true]:bg-indigo-100 data-[active=true]:text-indigo-700 text-gray-600 hover:bg-indigo-50"
-                    onClick={(e) => {
-                      /* ... tab handler ... */ e.currentTarget.setAttribute(
-                        "data-active",
-                        "true"
-                      );
-                      document
-                        .getElementById("tab-motion-1")
-                        ?.setAttribute("data-active", "false");
-                      document
-                        .getElementById("content-motion-2")
-                        ?.classList.remove("hidden");
-                      document
-                        .getElementById("content-motion-1")
-                        ?.classList.add("hidden");
-                    }}
-                    data-active="false"
+                     className={`px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 text-gray-600 hover:bg-indigo-50 ${
+                      activeExistenceTab === 'forms'
+                        ? 'bg-indigo-100 text-indigo-700'
+                        : 'bg-white'
+                    }`}
+                    onClick={() => setActiveExistenceTab('forms')}
                   >
-                    {t("existence.tabs.forms_relations")} { /* Updated key */ }
+                    {t("existence.tabs.forms_relations")}
                   </button>
                 </div>
               </div>
 
               <div
-                id="content-motion-1"
-                className="animate-fade animate-once animate-duration-[800ms]"
+                className={`animate-fade animate-once animate-duration-[800ms] ${
+                  activeExistenceTab === 'nature' ? '' : 'hidden'
+                }`}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12 items-center">
                   <motion.div
@@ -870,7 +848,7 @@ function App() {
                     className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100/80"
                   >
                     <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                      <h3 className="text-xl font-bold">{t('existence.motion.what_is.title')}</h3> { /* Removed numbering, using key */ }
+                      <h3 className="text-xl font-bold">{t('existence.motion.what_is.title')}</h3>
                       <p className="text-sm italic opacity-90">{t('existence.motion.what_is.subtitle')}</p>
                     </div>
                     <div className="p-6 space-y-3">
@@ -922,7 +900,7 @@ function App() {
                   className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 border border-gray-100/80"
                 >
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                    <h3 className="text-xl font-bold">{t('existence.motion.features.title')}</h3> { /* Removed numbering, using key */ }
+                    <h3 className="text-xl font-bold">{t('existence.motion.features.title')}</h3>
                   </div>
                   <div className="p-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
@@ -996,8 +974,9 @@ function App() {
               </div>
 
               <div
-                id="content-motion-2"
-                className="hidden animate-fade animate-once animate-duration-[800ms]"
+                className={`animate-fade animate-once animate-duration-[800ms] ${
+                  activeExistenceTab === 'forms' ? '' : 'hidden'
+                }`}
               >
                 <div className="mb-16 animate-fade-up animate-once animate-duration-[800ms]">
                   <h3 className="text-3xl font-light text-center mb-4 text-gray-800">{t('existence.basic_forms.title')}</h3>
