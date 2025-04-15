@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-gray-900 font-body min-h-screen;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply prose-headings:font-sans prose-headings:text-primary 
+           prose-p:text-gray-700 prose-p:leading-relaxed
+           prose-li:text-gray-700
+           prose-blockquote:border-secondary prose-blockquote:text-gray-700
+           prose-img:rounded-lg prose-img:shadow-lg;
+  }
+
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .heading {
+    @apply text-4xl sm:text-5xl font-bold text-primary mb-8;
+  }
+  
+  .subheading {
+    @apply text-2xl sm:text-3xl font-semibold text-secondary mb-6;
+  }
+
+  .btn {
+    @apply inline-block px-8 py-3 rounded-full transition-colors duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-secondary hover:bg-accent text-white;
+  }
+}
+
+/* Add these styles for the slideshow */
+.slide {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide.hidden {
+  display: none;
+}
+
+/* Add floating animation keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-around {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -15px);
+  }
+  50% {
+    transform: translate(-5px, -25px);
+  }
+  75% {
+    transform: translate(-15px, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Add 3D perspective transforms */
+.perspective {
+  perspective: 1000px;
+}
+
+.rotate-y-12 {
+  transform: rotateY(12deg);
+}
+
+.rotate-y-0 {
+  transform: rotateY(0deg);
+}
+
+.-rotate-y-12 {
+  transform: rotateY(-12deg);
+}
+
+/* Modern hover effects */
+.hover-lift {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Enhanced image zoom effect */
+.zoom-container {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.zoom-image {
+  transition: transform 0.8s ease;
+}
+
+.zoom-container:hover .zoom-image {
+  transform: scale(1.1);
+}
+
+/* Animate on scroll class (will be activated via JavaScript) */
+.animate-on-scroll.animate-in\:opacity-100 {
+  opacity: 1;
+}
+
+.animate-on-scroll.animate-in\:translate-y-0 {
+  transform: translateY(0);
+}
+
+.animate-on-scroll.animate-in\:translate-x-0 {
+  transform: translateX(0);
+}
+
+/* Basic Parallax Background Class */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Ensure consistent font for list markers in history section */
+/* Make selector more specific and use !important */
+#history .font-serif ul li::marker {
+  font-family: inherit !important;
+}
